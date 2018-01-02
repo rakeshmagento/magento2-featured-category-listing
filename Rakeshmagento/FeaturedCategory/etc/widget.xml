@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+	<widget class="Rakeshmagento\FeaturedCategory\Block\Widget\FeaturedCategoryWidget" id="featured_category_widget">
+		<label>Featured Category</label>
+		<description>Featured Category</description>
+		<parameters>
+			<parameter name="id_path" xsi:type="block" visible="true" required="true" sort_order="0">
+                <label translate="true">Select Parent Category</label>
+                <block class="Magento\Catalog\Block\Adminhtml\Category\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select Category...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="top_content" xsi:type="block" required="false" sort_order="10">
+                <label translate="true">Top Content</label>
+                <block class="Rakeshmagento\FeaturedCategory\Block\Adminhtml\Widget\TextField"/>
+            </parameter> 
+            <parameter name="category_count" xsi:type="text" required="true" sort_order="20">
+                <label translate="true">Category Count</label>
+                <description translate="true">Number of Sub Category to display</description>
+                <value>8</value>
+            </parameter>
+            <parameter name="image_height" xsi:type="text" required="true" sort_order="30">
+                <label translate="true">Thumbnail Height</label>
+                <value>300</value>
+            </parameter>
+            <parameter name="image_width" xsi:type="text" required="true" sort_order="40">
+                <label translate="true">Thumbnail Width</label>
+                <value>240</value>
+            </parameter>
+		</parameters>
+	</widget>
+</widgets>

@@ -1,0 +1,37 @@
+<div class="content-heading">
+   <h2 class="title"><?= /* @escapeNotVerified */ $block->getCategoryName() ?></h2>
+   <p><?= /* @escapeNotVerified */ $block->getTopContent() ?></p>
+</div>
+<?php 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$_outputhelper = $this->helper('Magento\Catalog\Helper\Output');
+$i = 0;
+?>
+<div class="catalog-category products wrapper products-grid">
+	<ol class="category-listing-grid list items product-items">
+	<?php foreach($block->getCategoryCollection() as $subcat): $i++;?>
+		<?php $_category = $objectManager->create('Magento\Catalog\Model\Category')->load($subcat->getId());?>
+		<li class="item product product-item">
+		<div class="product-item-info" data-container="product-grid">
+			<?php
+				$_imgHtml = '';
+				if ($_imgUrl  = $_category->getImageUrl()) {
+					$_imgHtml = '<img src="' . $_imgUrl . '" height="'.$block->getThumbnailHeight().'" width="'.$block->getThumbnailWidth().'"/>';
+					$_imgHtml = $_outputhelper->categoryAttribute($_category, $_imgHtml, 'image');
+			} ?>
+			<a href="<?= /* @escapeNotVerified */ $_category->getUrl() ?>" class="product photo product-item-photo">
+				<?php echo $_imgHtml ?>
+			</a>
+			<div class="product details product-item-details">
+				<strong class="product name product-item-name">
+					<a class="product-item-link" href="<?= /* @escapeNotVerified */ $_category->getUrl() ?>"><?= /* @escapeNotVerified */ $_category->getName() ?></a>
+				</strong>
+			</div>
+		 </div>
+		</li>
+	<?php if($i >= $block->getCategoryCount()) break;	?>
+	<?php endforeach;?>
+	</ol>
+</div>
+
+
